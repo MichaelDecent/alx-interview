@@ -4,9 +4,10 @@ This Module contains a functionthat returns a list of lists of integers
 representing the Pascal’s triangle of n
 """
 
+
 def pascal_triangle(n):
-    """ 
-    Returns a list of lists of integers representing the Pascal’s triangle 
+    """
+    Returns a list of lists of integers representing the Pascal’s triangle
     """
     if n <= 0:
         return []
@@ -24,4 +25,3 @@ def pascal_triangle(n):
         pascal_triangle.append(new_row)
 
     return pascal_triangle
-
