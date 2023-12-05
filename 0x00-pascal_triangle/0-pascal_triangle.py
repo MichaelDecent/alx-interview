@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This Module contains a functionthat returns a list of lists of integers
+This Module contains a function that returns a list of lists of integers
 representing the Pascal’s triangle of n
 """
 
