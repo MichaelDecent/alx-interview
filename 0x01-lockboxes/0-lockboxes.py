@@ -23,18 +23,42 @@ This program determines if all the boxes (list of lists) can be opened.
 #     return box_checked        
 
 def canUnlockAll(boxes):
+    """
+    Return True if all boxes can be opened, else return False
+    """
     if not boxes or len(boxes) == 0:
         return False
 
     box_status = {index: False for index in range(len(boxes))}
     box_status[0] = True
+    keys = boxes[0]
     
     for index, value in enumerate(boxes):
         for val in value:
-            if box_status[index] and 0 <= val < len(boxes):
-                box_status[val] = True         
+            if box_status[index] and val in keys:
+                box_status[val] = True
             if 0 <= val < index:
                 for val in boxes[index]:
                     box_status[val] = True
+        if index < len(boxes) - 1:
+            keys.extend(boxes[index + 1])
 
     return all(box_status.values())
+
+# def canUnlockAll(boxes):
+    # if not boxes or len(boxes) == 0:
+        # return False
+# 
+    # box_status = {index: False for index in range(len(boxes))}
+    # box_status[0] = True
+    # 
+    # for index, value in enumerate(boxes):
+        # for val in value:
+            # if box_status[index] == True:
+                # box_status[val] = True
+            # else:         
+                # if val < index:
+                    # for val in boxes[index]:
+                        # box_status[val] = True
+    # print(box_status)
+    # return all(box_status.values())
