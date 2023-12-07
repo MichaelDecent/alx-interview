@@ -31,9 +31,9 @@ def canUnlockAll(boxes):
     
     for index, value in enumerate(boxes):
         for val in value:
-            if box_status[index] == True and 0 <= val < len(boxes):
+            if box_status[index] and 0 <= val < len(boxes):
                 box_status[val] = True         
-            if val < index:
+            if 0 <= val < index:
                 for val in boxes[index]:
                     box_status[val] = True
 
