@@ -3,24 +3,6 @@
 This program determines if all the boxes (list of lists) can be opened.
 """
 
-# def canUnlockAll(boxes):
-#     """
-#     Return True if all boxes can be opened, else return False
-#     """
-#     keys = boxes[0]
-#     box_checked = False
-#     position = 0
-#     index = 0
-#     while index < len(boxes) - 1:
-#         if index+1 in keys:
-#             keys.extend(boxes[index+1])
-#             position += 1
-#             index = position
-#             box_checked = True
-#         else:
-#             index += 1
-#             box_checked = False
-#     return box_checked        
 
 def canUnlockAll(boxes):
     """
@@ -29,36 +11,17 @@ def canUnlockAll(boxes):
     if not boxes or len(boxes) == 0:
         return False
 
-    box_status = {index: False for index in range(len(boxes))}
-    box_status[0] = True
-    keys = boxes[0]
-    
-    for index, value in enumerate(boxes):
-        for val in value:
-            if box_status[index] and val in keys:
-                box_status[val] = True
-            if 0 <= val < index:
-                for val in boxes[index]:
-                    box_status[val] = True
-        if index < len(boxes) - 1:
-            keys.extend(boxes[index + 1])
+    n = len(boxes)
+    visited = [False] * n
+    visited[0] = True
+    keys = [0]
 
-    return all(box_status.values())
+    while keys:
+        current_box = keys.pop(0)
 
-# def canUnlockAll(boxes):
-    # if not boxes or len(boxes) == 0:
-        # return False
-# 
-    # box_status = {index: False for index in range(len(boxes))}
-    # box_status[0] = True
-    # 
-    # for index, value in enumerate(boxes):
-        # for val in value:
-            # if box_status[index] == True:
-                # box_status[val] = True
-            # else:         
-                # if val < index:
-                    # for val in boxes[index]:
-                        # box_status[val] = True
-    # print(box_status)
-    # return all(box_status.values())
+        for key in boxes[current_box]:
+            if 0 <= key < n and not visited[key]:
+                visited[key] = True
+                keys.append(key)
+
+    return all(visited)
