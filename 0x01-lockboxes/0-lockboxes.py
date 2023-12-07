@@ -25,6 +25,9 @@ This program determines if all the boxes (list of lists) can be opened.
 
 
 def canUnlockAll(boxes):
+    if not boxes or len(boxes) == 0:
+        return False
+
     box_status = {}
 
     for index, value in enumerate(boxes):
@@ -40,9 +43,9 @@ def canUnlockAll(boxes):
                 for val in boxes[index]:
                     box_status[val] = True
 
-    all_true = all(value in {True} for value in box_status.values())
+    final_status = all(value for value in box_status.values())
 
-    return all_true
+    return final_status
 
     
                 
