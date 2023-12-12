@@ -66,6 +66,7 @@ def paste(no_char):
 
 def determine_ops(operation, no_char, expected_char):
     """
+    deternine which opreation to run
     """
     no_char = operation(no_char)
     return True if no_char == expected_char else False
