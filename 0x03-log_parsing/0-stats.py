@@ -1,59 +1,70 @@
 #!/usr/bin/python3
+"""
+a script that reads stdin line by line and computes metrics:
 
-"""This module contain function that reads stdin
-line by line and computes metrics from it"""
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size> (if the format is not this one, the line must be skipped)
+After every 10 lines and/or a keyboard interruption (CTRL + C), print these statistics from the beginning:
+Total file size: File size: <total size>
+where <total size> is the sum of all previous <file size> (see input format above)
+Number of lines by status code:
+possible status code: 200, 301, 400, 401, 403, 404, 405 and 500
+if a status code doesn’t appear or is not an integer, don’t print anything for this status code
+format: <status code>: <number>
+status codes should be printed in ascending order
 
-from sys import stdin
+"""
+import sys
+from ipaddress import ip_address
+from datetime import datetime
 from typing import Dict
 
 
-def print_logs(size: int, res_dic: Dict[str, int]) -> None:
-    """Print the log metrics"""
-    print('File size: {}'.format(size))
-    for k, v in sorted(res_dic.items()):
-        if v != 0:
-            """If the key is found in the file or stdin i.e its
-            value increases, print it otherwise skip it"""
-            print('{}: {}'.format(k, v))
+def print_log(total_size: int, status_codes: Dict[str, int])-> None:
+    """
+    Prints log metrics
+    """
+    print(f"File size: {total_size}")
+    for key, val in status_codes.items():
+        if val != 0:
+            print(f"{key}: {val}")
 
 
-responseDic = {
-        "200": 0,
-        "301": 0,
-        "400": 0,
-        "401": 0,
-        "403": 0,
-        "404": 0,
-        "405": 0,
-        "500": 0
-        }
 
-line_counter = 0
-size = 0
+status_codes_dict = {
+    "200": 0,
+    "301": 0,
+    "400": 0,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "405": 0,
+    "500": 0,
+}
+total_size = 0
 
 try:
-    for line in stdin:
-        """Only print when 10 lines has been read"""
-        if line_counter != 0 and line_counter % 10 == 0:
-            print_logs(size, responseDic)
+    for count, line in enumerate(sys.stdin, 1):
+        format = line.split()
+        status_code = format[7]
+        file_size = int(format[8])
+        total_size += file_size
+        for key, val in status_codes_dict.items():
+            if status_code == key:
+                status_codes_dict[key] += 1
 
-        line_counter += 1
-        """Convert each line to a list for easy parsing using space"""
-        lineArr = line.split()
-        try:
-            size += int(lineArr[-1])
-        except Exception:
-            pass
-
-        try:
-            key = lineArr[-2]
-            if key in responseDic:
-                responseDic[key] += 1
-        except Exception:
-            pass
-    print_logs(size, responseDic)
+        if count % 10 == 0:
+            print_log(total_size, status_codes_dict)
+            
 
 except KeyboardInterrupt:
-    """Print when ctrl-c is pressed"""
-    print_logs(size, responseDic)
-    raise
+    print_log(total_size, status_codes_dict)
+
+
+# def check_format(format):
+#     separators = [" ", "[", "]"
+#     pattern = '|'.join(map(re.escape, separators)
+#     format = re.split(pattern, line, 5)
+#     print(format)
+#     if ip_address(format[0]):
+#         print(True)
+#     else:
