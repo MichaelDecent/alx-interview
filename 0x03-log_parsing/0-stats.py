@@ -8,9 +8,7 @@ from typing import Dict
 
 
 def print_logs(total_size: int, status_codes: Dict[str, int]) -> None:
-    """
-    Prints log metrics
-    """
+    """Print the log metrics"""
     print(f"Total file size: {total_size}")
     for key in sorted(status_codes.keys()):
         if status_codes[key] > 0:
