@@ -7,14 +7,14 @@ from sys import stdin
 from typing import Dict
 
 
-def print_log(total_size: int, status_codes: Dict[str, int]) -> None:
-    """
-    Prints log metrics
-    """
-    print(f"Total file size: {total_size}")
-    for key in sorted(status_codes.keys()):
-        if status_codes[key] > 0:
-            print(f"{key}: {status_codes[key]}")
+def print_logs(size: int, res_dic: Dict[str, int]) -> None:
+    """Print the log metrics"""
+    print('File size: {}'.format(size))
+    for k, v in sorted(res_dic.items()):
+        if v != 0:
+            """If the key is found in the file or stdin i.e its
+            value increases, print it otherwise skip it"""
+            print('{}: {}'.format(k, v))
 
 
 status_codes_dict = {
@@ -43,7 +43,7 @@ try:
                 pass
 
         if count % 10 == 0:
-            print_log(total_size, status_codes_dict)
+            print_logs(total_size, status_codes_dict)
 
 except KeyboardInterrupt:
-    print_log(total_size, status_codes_dict)
+    print_logs(total_size, status_codes_dict)
