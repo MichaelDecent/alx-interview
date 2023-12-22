@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
 This Module contains a script that reads stdin line
 by line and computes metrics
@@ -12,10 +11,10 @@ def print_log(total_size: int, status_codes: Dict[str, int]) -> None:
     """
     Prints log metrics
     """
-    print("Total file size: {}".format(total_size))
+    print(f"Total file size: {total_size}")
     for key in sorted(status_codes.keys()):
         if status_codes[key] > 0:
-            print("{}: {}".format(key, status_code[key]))
+            print(f"{key}: {status_codes[key]}")
 
 
 status_codes_dict = {
