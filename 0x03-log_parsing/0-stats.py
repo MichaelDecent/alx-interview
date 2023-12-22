@@ -11,8 +11,8 @@ possible status code: 200, 301, 400, 401, 403, 404, 405 and 500
 if a status code doesnt appear or is not an integer, dont print anything for this status code
 format: <status code>: <number>
 status codes should be printed in ascending order
-
 """
+
 import sys
 from typing import Dict
 
@@ -56,13 +56,3 @@ try:
 
 except KeyboardInterrupt:
     print_log(total_size, status_codes_dict)
-
-
-# def check_format(format):
-#     separators = [" ", "[", "]"
-#     pattern = '|'.join(map(re.escape, separators)
-#     format = re.split(pattern, line, 5)
-#     print(format)
-#     if ip_address(format[0]):
-#         print(True)
-#     else:
