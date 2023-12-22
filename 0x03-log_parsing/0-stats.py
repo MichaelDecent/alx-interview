@@ -4,8 +4,9 @@
 This Module contains a script that reads stdin line by line and computes metrics
 """
 import sys
+from typing import Dict
 
-def print_log(total_size, status_codes):
+def print_log(total_size: int, status_codes: Dict[str, int]):
     """
     Prints log metrics
     """
