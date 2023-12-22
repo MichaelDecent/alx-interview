@@ -30,18 +30,19 @@ total_size = 0
 try:
     for count, line in enumerate(stdin, 1):
         parts = line.split()
-        if len(parts) == 9:
+        try:
+            total_size += int(parts[-1])
+        except Exception:
+            pass
+        try:
             status_code = parts[-2]
-            try:
-                file_size = int(parts[-1])
-                total_size += file_size
-                if status_code in status_codes_dict:
-                    status_codes_dict[status_code] += 1
-            except Exception:
-                pass
-
+            if status_code in status_codes_dict:
+                status_codes_dict[status_code] += 1
+        except Exception:
+            pass
         if count % 10 == 0:
             print_logs(total_size, status_codes_dict)
+
 
 except KeyboardInterrupt:
     print_logs(total_size, status_codes_dict)
