@@ -16,6 +16,18 @@ status codes should be printed in ascending order
 import sys
 from ipaddress import ip_address
 from datetime import datetime
+from typing import Dict
+
+
+def print_log(total_size: int, status_codes: Dict[str, int])-> None:
+    """
+    Prints log metrics
+    """
+    print(f"File size: {total_size}")
+    for key, val in status_codes.items():
+        if val != 0:
+            print(f"{key}: {val}")
+
 
 
 status_codes_dict = {
@@ -41,16 +53,12 @@ try:
                 status_codes_dict[key] += 1
 
         if count % 10 == 0:
-            print(f"File size: {total_size}")
-            for key, val in status_codes_dict.items():
-                if val != 0:
-                    print(f"{key}: {val}")
+            print_log(total_size, status_codes_dict)
+            
 
 except KeyboardInterrupt:
-    print(f"File size: {total_size}")
-    for key, val in status_codes_dict.items():
-        if val != 0:
-            print(f"{key}: {val}")
+    print_log(total_size, status_codes_dict)
+
 
 # def check_format(format):
 #     separators = [" ", "[", "]"
