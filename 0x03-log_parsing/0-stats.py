@@ -45,3 +45,7 @@ try:
 
 except KeyboardInterrupt:
     print_logs(total_size, status_codes_dict)
+
+finally:
+    print_logs(total_size, status_codes_dict)
+
