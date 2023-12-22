@@ -12,9 +12,6 @@ if a status code doesnt appear or is not an integer, dont print anything for thi
 format: <status code>: <number>
 status codes should be printed in ascending order
 """
-
-#!/usr/bin/python3
-
 import sys
 
 def print_log(total_size, status_codes):
