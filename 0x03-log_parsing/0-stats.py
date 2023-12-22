@@ -13,20 +13,18 @@ format: <status code>: <number>
 status codes should be printed in ascending order
 """
 
+#!/usr/bin/python3
+
 import sys
-from typing import Dict
 
-
-def print_log(total_size: int, status_codes: Dict[str, int])-> None:
+def print_log(total_size, status_codes):
     """
     Prints log metrics
     """
-    print(f"File size: {total_size}")
-    for key, val in status_codes.items():
-        if val != 0:
-            print(f"{key}: {val}")
-
-
+    print(f"Total file size: {total_size}")
+    for key in sorted(status_codes.keys()):
+        if status_codes[key] > 0:
+            print(f"{key}: {status_codes[key]}")
 
 status_codes_dict = {
     "200": 0,
@@ -42,17 +40,19 @@ total_size = 0
 
 try:
     for count, line in enumerate(sys.stdin, 1):
-        format = line.split()
-        status_code = format[7]
-        file_size = int(format[8])
-        total_size += file_size
-        for key, val in status_codes_dict.items():
-            if status_code == key:
-                status_codes_dict[key] += 1
+        parts = line.split()
+        if len(parts) == 9:
+            status_code = parts[-2]
+            try:
+                file_size = int(parts[-1])
+                total_size += file_size
+                if status_code in status_codes_dict:
+                    status_codes_dict[status_code] += 1
+            except ValueError:
+                pass
 
         if count % 10 == 0:
             print_log(total_size, status_codes_dict)
-            
 
 except KeyboardInterrupt:
     print_log(total_size, status_codes_dict)
