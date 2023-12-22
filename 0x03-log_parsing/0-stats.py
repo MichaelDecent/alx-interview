@@ -13,7 +13,6 @@ format: <status code>: <number>
 status codes should be printed in ascending order
 
 """
-import re
 import sys
 from ipaddress import ip_address
 from datetime import datetime
