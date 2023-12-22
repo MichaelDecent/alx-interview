@@ -30,7 +30,7 @@ total_size = 0
 try:
     for count, line in enumerate(stdin, 1):
         parts = line.split()
-        if len(parts) == 9:
+        if len(parts) <= 9:
             status_code = parts[-2]
             try:
                 file_size = int(parts[-1])
