@@ -3,7 +3,7 @@
 """
 This Module contains a script that reads stdin line by line and computes metrics
 """
-import sys
+from sys import stdin
 from typing import Dict
 
 def print_log(total_size: int, status_codes: Dict[str, int]):
@@ -28,7 +28,7 @@ status_codes_dict = {
 total_size = 0
 
 try:
-    for count, line in enumerate(sys.stdin, 1):
+    for count, line in enumerate(stdin, 1):
         parts = line.split()
         if len(parts) == 9:
             status_code = parts[-2]
