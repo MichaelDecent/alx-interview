@@ -30,14 +30,14 @@ total_size = 0
 try:
     for count, line in enumerate(stdin, 1):
         parts = line.split()
-        if len(parts) <= 9:
+        if len(parts) == 9:
             status_code = parts[-2]
             try:
                 file_size = int(parts[-1])
                 total_size += file_size
                 if status_code in status_codes_dict:
                     status_codes_dict[status_code] += 1
-            except ValueError:
+            except Exception:
                 pass
 
         if count % 10 == 0:
