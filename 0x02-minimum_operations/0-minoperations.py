@@ -17,7 +17,7 @@ Paste => HHHHHH => Paste => HHHHHHHHH
 """
 
 
-def minOperations(n):
+def minOperations(n: int) -> int:
     """
     a method that calculates the fewest number of operations
     needed to result in exactly n H characters in the file
