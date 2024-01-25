@@ -2,10 +2,9 @@
 """A Module that contains a function
 Rotates 2D Matrix by 90 degrees
 """
-from typing import List
 
 
-def rotate_2d_matrix(matrix: List[list]) -> None:
+def rotate_2d_matrix(matrix) -> None:
     """Rotates 2D Matrix by 90 degrees"""
     n = len(matrix)
 
