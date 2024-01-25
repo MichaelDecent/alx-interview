@@ -6,6 +6,7 @@ from typing import List
 
 
 def rotate_2d_matrix(matrix: List[list]) -> None:
+    """Rotates 2D Matrix by 90 degrees"""
     n = len(matrix)
 
     # Transpose the matrix
@@ -13,5 +14,6 @@ def rotate_2d_matrix(matrix: List[list]) -> None:
         for j in range(i, n):
             matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 
+    #reverse each row in the matrix
     for i in range(n):
         matrix[i].reverse()
