@@ -21,7 +21,9 @@ def makeChange(coins, total):
         while current_total < total and remainder >= value:
             count_list.append(value)
             current_total = sum(count_list)
+            remainder = total % sum(count_list)
             if current_total == total:
                 return len(count_list)
             elif current_total > total:
                 return -1
+    return -1
