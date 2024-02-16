@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 This Module contains a function that runs Prime Game
 """
