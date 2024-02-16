@@ -2,10 +2,8 @@
 """
 This Module contains a function that runs Prime Game
 """
-from typing import List, Union
 
-
-def is_prime(num: int) -> bool:
+def is_prime(num):
     """Determines the prime number"""
     if num < 2:
         return False
@@ -15,7 +13,7 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def isWinner(x: int, nums: List[int]) -> Union[str, None]:
+def isWinner(x, nums):
     """Determines the Winner"""
     maria_wins = 0
     ben_wins = 0
